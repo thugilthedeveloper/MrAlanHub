@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Alan's HUB Stable VERSION</title>
+    <script src="https://lucide.dev/icons/lucide.js"></script>
+    <style>
+        :root {
+            --bg-dark: #020617; 
+            --card-bg: rgba(30, 41, 59, 0.5);
+            --accent-blue: #38bdf8;
+            --accent-purple: #a855f7;
+            --text-main: #f1f5f9;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 40%);
+            color: var(--text-main);
+            margin: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.02); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 5px rgba(168, 85, 247, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.6); }
+            100% { box-shadow: 0 0 5px rgba(168, 85, 247, 0.2); }
+        }
+
+        header {
+            background: radial-gradient(circle at top, #1e293b, #020617);
+            padding: 6rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+        }
+
+        header h1 {
+            font-size: clamp(3rem, 12vw, 6rem);
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: -4px;
+            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.2));
+        }
+
+        .container {
+            max-width: 1800px; 
+            margin: -5rem auto 2rem;
+            padding: 0 3rem;
+            flex: 1;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 2.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: var(--accent-blue);
+            background: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h2 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        .message-box {
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 15px;
+            padding: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #0284c7, #7c3aed);
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 14px;
+            font-weight: 800;
+            text-align: center;
+            margin-top: auto;
+            transition: 0.3s all ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.8rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 8px 15px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn-pmt {
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            animation: pulse-glow 3s infinite;
+        }
+
+        .btn-alt {
+            background: rgba(255, 255, 255, 0.03);
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--accent-purple);
+            font-weight: 900;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        /* --- FOOTER STYLES --- */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .version-tag {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--accent-purple);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            display: inline-block;
+            width: fit-content;
+            margin: 0 auto;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .copyright {
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        /* Animations */
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+
+        .watermark {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px) saturate(200%);
+            -webkit-backdrop-filter: blur(15px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .watermark-text {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+            font-family: monospace;
+        }
+
+        .watermark-icon {
+            color: var(--accent-blue);
+            width: 20px;
+            height: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1><i data-lucide="brain-circuit"></i> Science Hub</h1>
+    <p style="color: var(--text-dim); font-size: 1.2rem;">Elite Resource Command Center</p>
+</header>
+
+<div class="container">
+    <div class="grid">
+
+        <!-- 1. PROGRESS (moved to first) -->
+        <div class="card">
+            <span class="badge">Telemetry</span>
+            <h2><i data-lucide="activity"></i> Progress</h2>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem;">Monitor test scores and track your performance over time.</p>
+            <a href="https://docs.google.com/spreadsheets/d/1JdslBW3FEQayu7oc8CPvfXFyBRZReu90wX_q4LKcAws/edit?usp=sharing" class="btn" target="_blank">Test Tracker</a>
+        </div>
+
+        <!-- 2. ONLINE RESOURCES (new, second position) -->
+        <div class="card">
+            <span class="badge">Online Resources</span>
+            <h2><i data-lucide="globe-2"></i> Resource Hub</h2>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem;">Top-tier IGCSE revision platforms all in one place.</p>
+            <a href="https://www.physicsandmathstutor.com/" class="btn btn-pmt" target="_blank">Physics & Maths Tutor</a>
+            <a href="https://www.savemyexams.com/" class="btn btn-alt" target="_blank">Save My Exams</a>
+            <a href="https://cognitoedu.org/" class="btn btn-alt" target="_blank">Cognito Education</a>
+            <a href="https://www.igcsepro.org/" class="btn btn-alt" target="_blank">IGCSE Pro</a>
+        </div>
+
+        <!-- 3. STUDY DOCS -->
+        <div class="card">
+            <span class="badge">Direct Access</span>
+            <h2><i data-lucide="book-open"></i> Study Docs</h2>
+            <div class="message-box">
+                Subjects split for easy reference.
+            </div>
+            <a href="https://docs.google.com/document/d/1jadoijiXUl8PZ7jFdQLXsgN48jirtqTHDonDUyQFEP8/edit?tab=t.0#heading=h.ih24xfdlsby0" class="btn btn-alt" target="_blank">Physics Notes</a>
+            <a href="https://docs.google.com/document/d/1AI2eNs2-qR5Oj1QOPJSx9u8RQs9JPdA3C3eMQUhhDcg/edit?tab=t.jxszj0fmhdwg" class="btn btn-alt" target="_blank">Chemistry Notes</a>
+            <a href="https://docs.google.com/document/d/1iF4HYEZEEmT9qjb4Bldfbx13KYMh94-Um_-kHViMEuw/edit?tab=t.qce4imh8wnma" class="btn btn-alt" target="_blank">Biology Notes</a>
+            <a href="https://drive.google.com/drive/folders/1BAwTy28B3qS6WwNt-tsnYLHrKv8YRGk9?usp=sharing" class="btn btn-alt" target="_blank">Master Notes Drive</a>
+        </div>
+
+        <!-- 4. IITIAN ACADEMY (drive link updated — user to replace YOUR_IITIAN_DRIVE_ID) -->
+        <div class="card">
+            <span class="badge">External Intel</span>
+            <h2><i data-lucide="globe"></i> IITian Academy</h2>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem;">Access the official IGCSE curriculum notes and resources from IITian.</p>
+            <a href="https://drive.google.com/drive/folders/1q3fopldY1tTm6qJm920FlC4oEHOtMdCV" class="btn" target="_blank">IITian Academy Drive</a>
+        </div>
+
+        <!-- 5. SIMULATIONS (PhET added) -->
+        <div class="card">
+            <span class="badge">Simulations</span>
+            <h2><i data-lucide="test-tube-2"></i> Lab Ops</h2>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem;">Interactive virtual lab environments and chemistry directories.</p>
+            <a href="https://docs.google.com/spreadsheets/d/1jh1AgM7Py2d3pIyHtJ4GSs2k7ozK8IzWV-zRYhfprCc/edit?gid=0#gid=0" class="btn" target="_blank">Chem Directory</a>
+            <a href="https://www.scarecrowscience.co.uk/apps/" class="btn btn-alt" target="_blank">Scarecrow Apps</a>
+            <a href="https://phet.colorado.edu/en/simulations/filter?subjects=chemistry,physics,biology" class="btn btn-alt" target="_blank">PhET Simulations</a>
+        </div>
+
+        <!-- 6. YOUTUBE VIDEOS (new tab) -->
+        <div class="card">
+            <span class="badge">Video Lessons</span>
+            <h2><i data-lucide="youtube"></i> Video Hub</h2>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem;">Curated YouTube channels for IGCSE science subjects.</p>
+            <a href="https://www.youtube.com/@IGCSEstudybuddy" class="btn" target="_blank">IGCSE Study Buddy — Chem & Bio</a>
+            <a href="https://www.youtube.com/@plaacademy" class="btn btn-alt" target="_blank">PLA Academy — Physics</a>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="version-tag">HUB VERSION V3.7.3 FAST OS</div>
+        <div class="copyright">© 2026 HUB ALL RIGHTS RESERVED.</div>
+    </div>
+</footer>
+
+<div class="watermark">
+    <i data-lucide="terminal" class="watermark-icon"></i>
+    <span class="watermark-text">V3.7.2 FAST OS</span>
+</div>
+
+<script>
+    lucide.createIcons();
+</script>
+
+</body>
+</html>

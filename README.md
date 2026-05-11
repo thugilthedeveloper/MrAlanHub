@@ -1,4 +1,4 @@
-Main Release of Mr. Alan's Hub. Main Release to be commited by 10th of May 2026
+Main Release of Mr. Alan's Hub.
 
 ## Live Websites
 The live versions of this website is hosted at: https://mr-alan-hub-official.netlify.app, https://thugilthedeveloper.github.io/MrAlanHub

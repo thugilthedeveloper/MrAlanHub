@@ -6,7 +6,7 @@ This project is built and maintained by the following individuals. Under the ter
 @thugilthedeveloper - Project Lead & Hosting
 
 ### Developers
-@grigory-hash - Core Development
+@grigory-hash - Core Development - Founder
 Anonymous Contributor - Development & Support
 
 ---

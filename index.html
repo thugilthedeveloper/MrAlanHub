@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
-  <title>Mr. Alan's SCIENCE HUB </title>
+  <title>Mr. Alan's SCIENCE HUB | Unified Study Core</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <!-- Lucide Icons -->
@@ -29,8 +29,6 @@
       --c3b: #06b6d4;
       --c4a: #f59e0b;
       --c4b: #ef4444;
-      --c5a: #3b82f6;
-      --c5b: #8b5cf6;
       --c6a: #ef4444;
       --c6b: #f97316;
     }
@@ -258,7 +256,6 @@
     .card-2 { --card-grad: linear-gradient(90deg, var(--c2a), var(--c2b)); }
     .card-3 { --card-grad: linear-gradient(90deg, var(--c3a), var(--c3b)); }
     .card-4 { --card-grad: linear-gradient(90deg, var(--c4a), var(--c4b)); }
-    .card-5 { --card-grad: linear-gradient(90deg, var(--c5a), var(--c5b)); }
     .card-6 { --card-grad: linear-gradient(90deg, var(--c6a), var(--c6b)); }
 
     .badge {
@@ -337,7 +334,6 @@
     .card-2 .btn-primary { background: linear-gradient(135deg, var(--c2a), var(--c2b)); color: #fff; box-shadow: 0 4px 20px rgba(168, 85, 247, .25); }
     .card-3 .btn-primary { background: linear-gradient(135deg, var(--c3a), var(--c3b)); color: #fff; box-shadow: 0 4px 20px rgba(16, 185, 129, .25); }
     .card-4 .btn-primary { background: linear-gradient(135deg, var(--c4a), var(--c4b)); color: #fff; box-shadow: 0 4px 20px rgba(245, 158, 11, .25); }
-    .card-5 .btn-primary { background: linear-gradient(135deg, var(--c5a), var(--c5b)); color: #fff; box-shadow: 0 4px 20px rgba(59, 130, 246, .25); }
     .card-6 .btn-primary { background: linear-gradient(135deg, var(--c6a), var(--c6b)); color: #fff; box-shadow: 0 4px 20px rgba(239, 68, 68, .25); }
     .btn-ghost { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); }
     .btn-ghost:hover { background: rgba(255, 255, 255, 0.12); }
@@ -351,8 +347,11 @@
       border-radius: 6px;
       border: 1px solid rgba(239, 68, 68, .35);
       text-transform: uppercase;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin: 4px 0;
+      width: fit-content;
     }
 
     /* back page section */
@@ -544,7 +543,7 @@
       <ul style="list-style:none;padding:0;color:#fff;line-height:2.1;">
         <li>⚡ 9s Boot sequence</li><li>💎 Liquid Glass UI</li><li>🤝🏻 Collaboration with FAST OS</li>
         <li>🎨 Per-card redesign</li><li>✨ Scroll-reveal card animations</li><li>🚀 Shimmer hover effects</li>
-        <li>📱 Fully responsive</li><li>⚖️ Official Copyright & Terms section added</li>
+        <li>📱 Fully responsive</li><li>⚖️ Official Copyright & Terms section</li>
       </ul>
       <button class="btn btn-primary card-1" style="width:100%;margin-top:20px;cursor:pointer;border:none;background:linear-gradient(135deg, #38bdf8, #6366f1);color:#fff;padding:14px;border-radius:16px;font-weight:700;" onclick="toggleModal()">RETURN TO HUB</button>
     </div>
@@ -568,7 +567,7 @@
     <p class="header-sub">COMMAND CENTER V4.2.0</p>
   </header>
 
-  <!-- CARDS GRID (original) -->
+  <!-- CARDS GRID (UPDATED: removed individual physics/chem/bio buttons + removed IITian card, merged drive) -->
   <div class="container">
     <div class="grid">
       <div class="card card-1">
@@ -588,19 +587,21 @@
           <a href="https://www.igcsepro.org/" class="btn btn-ghost" target="_blank">IGCSE Pro</a>
         </div>
       </div>
+      
+      <!-- STUDY DOCS CARD (CARD-3) — removed all Physics, Chemistry, Biology individual buttons, added IITian Academy Drive + Master Drive + Mr.Alan notes remain -->
       <div class="card card-3">
         <span class="badge">CORE ARCHIVE</span>
         <h2><span class="card-icon">📖</span> Study Docs</h2>
-        <div class="message-box">Physics, Chemistry, Biology repositories & Mr. Alan notes.</div>
+        <div class="message-box">Physics, Chemistry, Biology repositories & Mr. Alan notes. Unified master archive.</div>
         <div class="btn-group">
-          <a href="https://docs.google.com/document/d/1iF4HYEZEEmT9qjb4Bldfbx13KYMh94-Um_-kHViMEuw/edit" class="btn btn-primary" target="_blank">Physics</a>
-          <a href="https://docs.google.com/document/d/1AI2eNs2-qR5Oj1QOPJSx9u8RQs9JPdA3C3eMQUhhDcg/edit" class="btn btn-ghost" target="_blank">Chemistry</a>
-          <a href="https://docs.google.com/document/d/1jadoijiXUl8PZ7jFdQLXsgN48jirtqTHDonDUyQFEP8/edit" class="btn btn-ghost" target="_blank">Biology</a>
-          <a href="https://drive.google.com/drive/folders/13kc-hxu9JDubd1okyR6ACtg106etZC10" class="btn btn-ghost" target="_blank">Mr.Alan notes</a>
-          <span class="dev-badge">Under Development</span>
-          <a href="https://drive.google.com/drive/folders/1BAwTy28B3qS6WwNt-tsnYLHrKv8YRGk9" class="btn btn-ghost" target="_blank">Master Drive</a>
+          <a href="https://drive.google.com/drive/folders/13kc-hxu9JDubd1okyR6ACtg106etZC10" class="btn btn-primary" target="_blank">Mr. Alan 📘 Notes</a>
+          <a href="https://drive.google.com/drive/folders/1BAwTy28B3qS6WwNt-tsnYLHrKv8YRGk9" class="btn btn-ghost" target="_blank">Textbook Drive</a>
+          <!-- MERGED IITIAN ACADEMY DRIVE HERE -->
+          <a href="https://drive.google.com/drive/folders/1q3fopldY1tTm6qJm920FlC4oEHOtMdCV" class="btn btn-ghost" target="_blank">IITian Academy Drive</a>
+          <span class="dev-badge">📚 Mr.Alan Notes Under Construction</span>
         </div>
       </div>
+      
       <div class="card card-4">
         <span class="badge">LAB DATA</span>
         <h2><span class="card-icon">🧪</span> Practical Docs</h2>
@@ -611,12 +612,8 @@
           <a href="https://phet.colorado.edu/en/simulations/filter?subjects=chemistry,physics,biology" class="btn btn-ghost" target="_blank">PhET Sims</a>
         </div>
       </div>
-      <div class="card card-5">
-        <span class="badge">EXTERNAL INTEL</span>
-        <h2><span class="card-icon">📁</span> IITian Academy</h2>
-        <div class="message-box">Direct access to IITian Academy IGCSE drive.</div>
-        <div class="btn-group"><a href="https://drive.google.com/drive/folders/1q3fopldY1tTm6qJm920FlC4oEHOtMdCV" class="btn btn-primary" target="_blank">IITian Academy Drive</a></div>
-      </div>
+      
+      <!-- VISUALS CARD (original, kept) -->
       <div class="card card-6">
         <span class="badge">VISUALS</span>
         <h2><span class="card-icon">🎬</span> Video Hub</h2>
@@ -632,10 +629,10 @@
   <!-- BUG REPORT SECTION -->
   <div class="back-page-section">
     <div class="bug-container">
-      <div class="bug-card"><div class="bug-title"><i data-lucide="instagram" style="color:#e1306c;"></i> Instagram</div><div class="bug-detail"><a href="https://instagram.com/grigoriy676767" target="_blank" class="instagram-link">@grigoriy676767</a></div><div class="bug-sub" style="color:#94a3b8; font-size:0.8rem;">Bug reports & feedback</div></div>
+      <div class="bug-card"><div class="bug-title"><i data-lucide="instagram" style="color:#e1306c;"></i> Instagram</div><div class="bug-detail"><a href="https://instagram.com/grigoriy6767" target="_blank" class="instagram-link">@grigoriy6767</a></div><div class="bug-sub" style="color:#94a3b8; font-size:0.8rem;">Bug reports & feedback</div></div>
       <div class="bug-card"><div class="bug-title"><i data-lucide="message-circle" style="color:#25D366;"></i> WhatsApp</div><div class="bug-detail"><span class="whatsapp-link">+65 859923389</span></div><div class="bug-sub" style="color:#94a3b8; font-size:0.8rem;">Direct bug reports (text)</div></div>
     </div>
-    <hr /><div class="footer-note">⚡ Report anomalies · help improve SCIENCE HUB · FAST OS collaboration active</div>
+    <hr /><div class="footer-note">⚡ Report anomalies · help improve SCIENCE HUB · FAST OS collaboration </div>
   </div>
 
   <!-- ==================== LEGAL & LICENSE SECTION (ADDED) ==================== -->
@@ -681,7 +678,7 @@
     © 2026 @thugilthedeveloper, @grigorythehacker, Anonymous Contributor — SCIENCE HUB. Licensed under MIT + Attribution. All third-party resources belong to their respective owners.
   </div>
 
-  <div class="watermark" id="easterTrigger">V4.2.0  🤝🏻  FAST OS </div>
+  <div class="watermark" id="easterTrigger">V4.2.0  🤝🏻  FAST OS | Click Here for more info</div>
 
   <script>
     (function() {

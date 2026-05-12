@@ -3,11 +3,11 @@
 This project is built and maintained by the following individuals. Under the terms of the AGPLv3 license, all contributors retain copyright over their specific contributions.
 
 ### Core Maintainer
-@thugilthedeveloper - Project Lead & Hosting
+@thugilthedeveloper - Debugger - Ideator
 
 ### Developers
 @grigory-hash - Core Development - Founder
-Anonymous Contributor - Development & Support
+Anonymous Contributor - Development - UI looks - Debugger
 
 ---
 

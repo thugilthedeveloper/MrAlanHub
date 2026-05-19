@@ -66,6 +66,17 @@
     .divider { display: flex; align-items: center; gap: 10px; margin: 1.3rem 0; color: #475569; font-size: 0.7rem; text-transform: uppercase; }
     .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
 
+    /* Ban page styles */
+    #ban-page { position: fixed; inset: 0; z-index: 9500; display: none; align-items: center; justify-content: center; background: rgba(2,3,8,0.92); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); }
+    .ban-container { background: rgba(15,20,35,0.75); border: 2px solid #ef4444; border-radius: 28px; padding: 2.5rem 2rem; max-width: 440px; width: 90%; -webkit-backdrop-filter: blur(35px); backdrop-filter: blur(35px); box-shadow: 0 25px 60px rgba(0,0,0,0.8); text-align: center; animation: banPop 0.6s cubic-bezier(0.175,0.885,0.32,1.275); }
+    @keyframes banPop { from { transform:scale(0.85) translateY(20px); opacity:0; } to { transform:scale(1) translateY(0); opacity:1; } }
+    .ban-title { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: #ef4444; margin-bottom: 0.8rem; }
+    .ban-reason { color: #f87171; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .ban-countdown { font-size: 1.8rem; font-weight: 700; color: #facc15; margin: 1rem 0; }
+    .ban-fine { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 16px; padding: 1rem; margin: 1.5rem 0; color: #fca5a5; font-size: 0.8rem; }
+    .ban-close { background: rgba(239,68,68,0.2); border: 1px solid #ef4444; color: #fff; padding: 10px 24px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+    .ban-close:hover { background: rgba(239,68,68,0.4); }
+
     .chat-container { display: flex; height: 65vh; background: rgba(12,16,30,0.5); border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); margin-bottom: 2rem; }
     .chat-sidebar { width: 260px; border-right: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; flex-shrink: 0; }
     .chat-sidebar-header { display: flex; justify-content: center; padding: 1.2rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
@@ -104,14 +115,7 @@
     .header-title { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 9vw, 6.5rem); margin: 0; font-weight: 800; letter-spacing: -2px; background: linear-gradient(135deg, #ffffff 20%, #38bdf8 55%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4)); position: relative; z-index: 2; }
     .header-sub { color: #38bdf8; font-weight: 700; letter-spacing: 4px; font-size: 0.85rem; margin-top: 1rem; text-transform: uppercase; backdrop-filter: blur(10px); display: inline-block; padding: 0.3rem 1.8rem; border-radius: 40px; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.2); animation: pulseGlow 2.5s ease-in-out infinite; }
     @keyframes pulseGlow { 0%,100% { box-shadow: 0 0 10px rgba(56,189,248,0.1); } 50% { box-shadow: 0 0 25px rgba(56,189,248,0.3); } }
-    .container {
-      max-width: 1300px;
-      margin: -4rem auto 4rem;
-      padding: 0 1.8rem;
-      flex: 1;
-      position: relative;
-      z-index: 3;
-    }
+    .container { max-width: 1300px; margin: -4rem auto 4rem; padding: 0 1.8rem; flex: 1; position: relative; z-index: 3; }
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
     @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
     @media (max-width: 640px) { .grid { grid-template-columns: 1fr; gap: 1.5rem; } .container { padding: 0 1rem; } header { padding: 5rem 1rem 6rem; } .card { padding: 2rem 1.8rem; } .chat-sidebar { width: 100px; } }
@@ -250,9 +254,24 @@
       animation: sectionIn 0.4s ease-out forwards;
     }
     @keyframes sectionIn { to { opacity: 1; transform: translateY(0); } }
+
+    /* DevTools warning overlay */
+    #devtools-warning {
+      position: fixed; inset: 0; background: rgba(2,3,8,0.95); z-index: 99999;
+      display: none; align-items: center; justify-content: center; text-align: center;
+      color: #fff; font-family: 'Syne', sans-serif; font-size: 2rem;
+      flex-direction: column;
+    }
+    #devtools-warning p { font-family: 'DM Sans', sans-serif; font-size: 1rem; margin-top: 1rem; }
   </style>
 </head>
 <body>
+  <div id="devtools-warning">
+    <span style="font-size: 4rem;">🛑</span>
+    <h2>Developer Tools Detected</h2>
+    <p>Closing this window is required to continue using the Science Hub.</p>
+  </div>
+
   <div id="loader">
     <div class="boot-logo-container">
       <div class="boot-logo-glow"></div>
@@ -281,11 +300,29 @@
        data-auto_prompt="false">
   </div>
 
+  <!-- Ban page -->
+  <div id="ban-page">
+    <div class="ban-container">
+      <div class="ban-logo">🚫</div>
+      <div class="ban-title">Account Suspended</div>
+      <div class="ban-reason">
+        Reason: Violation of Terms &amp; Conditions.<br/>
+        Your account <strong id="ban-email-display"></strong> has been temporarily banned.
+      </div>
+      <div class="ban-countdown" id="ban-countdown-timer">Loading...</div>
+      <div class="ban-fine">
+        <strong>Early unban fine:</strong> $10 USD<br/>
+        <small>Pay to Grigoriy via Instagram @grigoriy676767 or WhatsApp +65 859923389</small>
+      </div>
+      <button class="ban-close" onclick="document.getElementById('ban-page').style.display='none'; document.getElementById('login-page').style.display='flex';">BACK TO LOGIN</button>
+    </div>
+  </div>
+
   <div id="login-page">
     <div class="login-container">
       <div class="login-logo">⚛️</div>
       <div class="login-title">Welcome to the Science Hub</div>
-      <p class="login-subtitle">Sign in to access your command center</p>
+      <p class="login-subtitle">Sign in with your <strong>@5steps.academy</strong> account</p>
       <div class="google-btn-wrapper">
         <div class="g_id_signin"
              data-type="standard"
@@ -297,7 +334,7 @@
         </div>
       </div>
       <div class="divider">or sign in with email</div>
-      <div class="input-group"><label>Email</label><input type="email" id="email-input" placeholder="student@sciencehub.io"/></div>
+      <div class="input-group"><label>Email (only @5steps.academy)</label><input type="email" id="email-input" placeholder="student@5steps.academy"/></div>
       <div class="input-group"><label>Password</label><input type="password" id="password-input" placeholder="••••••••"/></div>
       <button class="login-btn login-btn-primary" onclick="handleEmailAuth()">Sign In</button>
       <p style="color:#64748b;font-size:0.65rem;margin-top:1rem;">By signing in, you agree to our <strong>All Rights Reserved</strong> license.</p>
@@ -398,7 +435,6 @@
       <div id="section-chat" style="display:none;" class="section-page">
         <div class="chat-container">
           <div class="chat-sidebar">
-            <!-- Science HUB CHAT Logo -->
             <div class="chat-sidebar-header">
               <div class="chat-logo">
                 <div class="science-text">Science</div>
@@ -432,7 +468,6 @@
           <div class="chat-main"><div class="chat-header" id="chat-header-name">👋 Select a contact</div><div class="chat-messages" id="chat-messages-area"><p style="color:#64748b;text-align:center;">Select a user to start chatting</p></div><div class="chat-input-area"><input type="text" id="chat-input" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendMessage()"/><button onclick="sendMessage()">Send</button></div></div>
         </div>
       </div>
-      <!-- Admin section to view all messages -->
       <div id="section-admin" style="display:none;" class="section-page">
         <div class="admin-container">
           <div class="admin-title"><span>🛡️</span> Message History – All Users</div>
@@ -476,6 +511,63 @@
 
   <script>
     (function() {
+      // ========== SECURITY LAYER ==========
+      // Block common devtools shortcuts
+      document.addEventListener('keydown', function(e) {
+        // Block F12
+        if (e.keyCode === 123 || e.key === 'F12') e.preventDefault();
+        // Block Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C (Element picker)
+        if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) e.preventDefault();
+        // Block Ctrl+U (View Source), Ctrl+S (Save), Ctrl+C (only if we want, but might break normal copy)
+        if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83)) e.preventDefault();
+        // Allow Ctrl+C only on input fields (we'll handle separately)
+        if (e.ctrlKey && e.keyCode === 67 && !(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) e.preventDefault();
+      });
+
+      // DevTools detection using console.log timing
+      var devtoolsCheckInterval;
+      var devtoolsDetectCount = 0;
+      var devtoolsAlertShown = false;
+      const warningElem = document.getElementById('devtools-warning');
+
+      function checkDevTools() {
+        if (devtoolsAlertShown) return;
+        const largeArray = new Array(100000).fill('x');
+        const t0 = performance.now();
+        console.log(largeArray);
+        const t1 = performance.now();
+        console.clear(); // try to hide it
+        const timeTaken = t1 - t0;
+        if (timeTaken > 100) { // threshold in ms
+          devtoolsDetectCount++;
+          if (devtoolsDetectCount >= 3) {
+            showDevtoolsWarning();
+          }
+        } else {
+          devtoolsDetectCount = 0;
+        }
+      }
+
+      function showDevtoolsWarning() {
+        if (devtoolsAlertShown) return;
+        devtoolsAlertShown = true;
+        warningElem.style.display = 'flex';
+        // Start a tight debugger loop that will freeze devtools
+        setInterval(function() { debugger; }, 50);
+        clearInterval(devtoolsCheckInterval); // stop the normal check
+      }
+
+      // Start detection after a short delay, but only if the user is on the hub maybe? We'll run it everywhere.
+      devtoolsCheckInterval = setInterval(checkDevTools, 500);
+
+      // Prevent right-click context menu
+      document.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        return false;
+      });
+
+      // ========== ORIGINAL CODE ==========
+      const ALLOWED_DOMAIN = '@5steps.academy';
       let currentUser = null;
       let pendingGoogleUser = null;
       let activeChatUser = null;
@@ -484,8 +576,14 @@
       const mainHub = document.getElementById('main-hub');
       let userDB = JSON.parse(localStorage.getItem('sciencehub_users') || '{}');
       const chatDB = JSON.parse(localStorage.getItem('sciencehub_chats') || '{}');
+      let bans = JSON.parse(localStorage.getItem('sciencehub_bans') || '{}');
 
-      // Permanently remove leftover demo users
+      const jasperEmail = 'jasper@5steps.academy';
+      if (!bans[jasperEmail] || Date.now() > bans[jasperEmail]) {
+        bans[jasperEmail] = Date.now() + 30 * 24 * 60 * 60 * 1000;
+        localStorage.setItem('sciencehub_bans', JSON.stringify(bans));
+      }
+
       delete userDB['physics_genius'];
       delete userDB['chem_master'];
       delete userDB['bio_explorer'];
@@ -493,21 +591,72 @@
 
       function saveUsers() { localStorage.setItem('sciencehub_users', JSON.stringify(userDB)); }
       function saveChats() { localStorage.setItem('sciencehub_chats', JSON.stringify(chatDB)); }
+      function saveBans() { localStorage.setItem('sciencehub_bans', JSON.stringify(bans)); }
 
-      // Superuser emails
       const ADMIN_EMAILS = ['grigoriy@5steps.academy', 'thugil@5steps.academy'];
       let isAdmin = false;
+      let banCountdownInterval = null;
+
+      function showBanPage(email) {
+        loginPage.style.display = 'none';
+        document.getElementById('onboarding-modal').style.display = 'none';
+        const banPage = document.getElementById('ban-page');
+        document.getElementById('ban-email-display').textContent = email;
+        banPage.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        const unbanTime = bans[email];
+        const timerElem = document.getElementById('ban-countdown-timer');
+        function updateTimer() {
+          const now = Date.now();
+          const remaining = unbanTime - now;
+          if (remaining <= 0) {
+            clearInterval(banCountdownInterval);
+            timerElem.textContent = "Your ban has expired. Please log in again.";
+            delete bans[email];
+            saveBans();
+            setTimeout(() => {
+              banPage.style.display = 'none';
+              loginPage.style.display = 'flex';
+            }, 2000);
+            return;
+          }
+          const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+          timerElem.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
+        }
+        updateTimer();
+        if (banCountdownInterval) clearInterval(banCountdownInterval);
+        banCountdownInterval = setInterval(updateTimer, 1000);
+      }
+
+      function checkBanned(email) {
+        if (bans[email] && Date.now() < bans[email]) {
+          showBanPage(email);
+          return true;
+        }
+        if (bans[email] && Date.now() >= bans[email]) {
+          delete bans[email];
+          saveBans();
+        }
+        return false;
+      }
 
       window.handleGoogleCredentialResponse = function(response) {
         const payload = decodeJwtResponse(response.credential);
         const userEmail = payload.email;
+        if (!userEmail.endsWith(ALLOWED_DOMAIN)) {
+          alert('Only @5steps.academy accounts are allowed.');
+          return;
+        }
+        if (checkBanned(userEmail)) return;
         const userName = payload.name;
         const userPicture = payload.picture;
         pendingGoogleUser = { name: userName, email: userEmail, avatar: '#4285F4', picture: userPicture };
         const found = Object.values(userDB).find(u => u.email === userEmail);
         if (found) {
           currentUser = found;
-          // Mark as active
           currentUser.lastActive = Date.now();
           saveUsers();
           checkAdmin();
@@ -530,6 +679,11 @@
         const email = document.getElementById('email-input').value.trim();
         const password = document.getElementById('password-input').value.trim();
         if (!email || !password) { alert('Fill all fields'); return; }
+        if (!email.endsWith(ALLOWED_DOMAIN)) {
+          alert('Only @5steps.academy accounts are allowed.');
+          return;
+        }
+        if (checkBanned(email)) return;
         const found = Object.values(userDB).find(u => u.email === email);
         if (found && found.password === password) { 
           currentUser = found;
@@ -537,8 +691,9 @@
           saveUsers();
           checkAdmin();
           showHub(); 
+        } else { 
+          alert("Invalid credentials. If you don't have an account, please sign up.");
         }
-        else { alert("Invalid credentials. If you don't have an account, please sign up."); }
       };
 
       window.completeOnboarding = function() {
@@ -549,9 +704,14 @@
         if (!username || username.length < 3) { alert('Username 3+ chars'); return; }
         if (!password || password.length < 6) { alert('Password 6+ chars'); return; }
         if (userDB[username]) { alert('Username taken!'); return; }
+        let email = pendingGoogleUser?.email || document.getElementById('email-input').value.trim();
+        if (!email.endsWith(ALLOWED_DOMAIN)) {
+          alert('Only @5steps.academy accounts can register.');
+          return;
+        }
+        if (checkBanned(email)) return;
         currentUser = {
-          username, email: pendingGoogleUser?.email || document.getElementById('email-input').value.trim(),
-          password, age, avatar: pendingGoogleUser?.avatar || '#38bdf8',
+          username, email, password, age, avatar: pendingGoogleUser?.avatar || '#38bdf8',
           name: pendingGoogleUser?.name || username, picture: pendingGoogleUser?.picture || '',
           lastActive: Date.now()
         };
@@ -570,6 +730,8 @@
       function showHub() {
         loginPage.style.display = 'none';
         document.getElementById('onboarding-modal').style.display = 'none';
+        document.getElementById('ban-page').style.display = 'none';
+        if (banCountdownInterval) clearInterval(banCountdownInterval);
         mainHub.classList.add('show-hub');
         document.body.style.overflow = 'auto';
         document.getElementById('user-badge-display').textContent = '👤 @' + currentUser.username;
@@ -586,10 +748,7 @@
       }
 
       window.logout = function() {
-        if (currentUser) {
-          // Keep lastActive as is; it will naturally become offline after 10 minutes
-          saveUsers();
-        }
+        if (currentUser) saveUsers();
         currentUser = null;
         isAdmin = false;
         activeChatUser = null;
@@ -606,17 +765,17 @@
         document.getElementById('chat-messages-area').innerHTML = '<p style="color:#64748b;text-align:center;">Select a user to start chatting</p>';
         document.getElementById('chat-header-name').textContent = '👋 Select a contact';
         stopRainbowAnimation();
+        if (banCountdownInterval) clearInterval(banCountdownInterval);
+        document.getElementById('ban-page').style.display = 'none';
       };
 
       window.showSection = function(s) {
-        // Hide all sections
         document.querySelectorAll('.section-page').forEach(sec => sec.style.display = 'none');
         const target = document.getElementById('section-' + s);
         if (target) {
           target.style.display = 'block';
-          // Trigger sectionIn animation
           target.style.animation = 'none';
-          target.offsetHeight; // force reflow
+          target.offsetHeight;
           target.style.animation = 'sectionIn 0.4s ease-out forwards';
         }
         document.getElementById('nav-home').classList.toggle('active', s === 'home');
@@ -634,7 +793,7 @@
           return; 
         }
         const now = Date.now();
-        const ONLINE_THRESHOLD = 10 * 60 * 1000; // 10 minutes
+        const ONLINE_THRESHOLD = 10 * 60 * 1000;
         list.innerHTML = contacts.map(u => {
           const isOnline = u.lastActive && (now - u.lastActive < ONLINE_THRESHOLD);
           const statusClass = isOnline ? 'status-online' : 'status-offline';
@@ -657,28 +816,18 @@
       function simulateReply(fromUser, toUser) {
         const key = [fromUser, toUser].sort().join('_');
         const replies = [
-          "Got it! 👍",
-          "Interesting point!",
-          "Let me think about that.",
-          "Can you explain more?",
-          "Haha, I agree!",
-          "Sure, I'll check that later.",
-          "Great, thanks!",
-          "How are you doing?",
-          "Yes, that's right!"
+          "Got it! 👍", "Interesting point!", "Let me think about that.", "Can you explain more?",
+          "Haha, I agree!", "Sure, I'll check that later.", "Great, thanks!", "How are you doing?", "Yes, that's right!"
         ];
         const randomText = replies[Math.floor(Math.random() * replies.length)];
         if (!chatDB[key]) chatDB[key] = [];
         chatDB[key].push({ from: fromUser, text: randomText, time: Date.now() });
         saveChats();
         if (activeChatUser === fromUser || activeChatUser === toUser) {
-          // Show typing indicator, then load messages
           const area = document.getElementById('chat-messages-area');
           area.innerHTML += '<div class="typing-indicator" id="typing-dots"><span></span><span></span><span></span></div>';
           area.scrollTop = area.scrollHeight;
-          setTimeout(() => {
-            loadMessages();
-          }, 600);
+          setTimeout(() => { loadMessages(); }, 600);
         }
       }
 
@@ -692,13 +841,9 @@
         saveChats();
         input.value = '';
         loadMessages();
-        // Trigger reply after 800ms
-        setTimeout(() => {
-          simulateReply(activeChatUser, currentUser.username);
-        }, 800);
+        setTimeout(() => { simulateReply(activeChatUser, currentUser.username); }, 800);
       };
 
-      // ==================== ADMIN PANEL ====================
       function loadAdminMessages() {
         const container = document.getElementById('admin-messages-area');
         const allChats = JSON.parse(localStorage.getItem('sciencehub_chats') || '{}');
@@ -721,7 +866,6 @@
         container.innerHTML = html || '<p style="color:#94a3b8;text-align:center;">No messages to display.</p>';
       }
 
-      // ==================== LOADER FIX ====================
       setTimeout(function() {
         loader.classList.add('hide-loader');
         setTimeout(function() { 
@@ -745,12 +889,8 @@
       let clicks = 0, tmr = null;
       wm.addEventListener('click', function(e) { clicks++; if (clicks === 1) tmr = setTimeout(() => { if (clicks < 5) toggleModal(); clicks = 0; }, 1600); if (clicks === 5) { clearTimeout(tmr); clicks = 0; e.stopPropagation(); e.preventDefault(); document.getElementById('easter-egg-modal').style.display = 'flex'; } });
 
-      document.addEventListener('contextmenu', e => e.preventDefault());
-      document.addEventListener('keydown', function(e) { if (e.ctrlKey && ['u','s','c'].includes(e.key.toLowerCase()) || e.key === 'F12') e.preventDefault(); });
-
       if (window.lucide) lucide.createIcons();
 
-      // ==================== SHIFTING RAINBOW ANIMATION ====================
       let rainbowInterval = null;
       function startRainbowAnimation() {
         const card = document.getElementById('ai-tutor-card');
@@ -772,11 +912,9 @@
         }
       }
 
-      // ==================== AI TUTOR INTEGRATION (Cerebras) ====================
       const CEREBRAS_KEY = "csk-nmkjhvmyc445vd6xx52xkyv286kpjvvjpkh28jcchpfyre4j";
       const CEREBRAS_ENDPOINT = "https://api.cerebras.ai/v1/chat/completions";
       const MODEL_NAME = "llama3.1-8b";
-
       const DAILY_LIMIT_AI = 30;
       const COOLDOWN_MS_AI = 10000;
       const BLOCKED_WORDS_AI = ["brainrot", "67", "skibidi", "sigma", "rizz", "gyatt", "lol", "spam", "hack", "infinite", "stupid", "dumb"];
@@ -806,7 +944,6 @@
       async function askClaude(question, username) {
         let quota = getUserAIQuota(username);
         const now = Date.now();
-
         if (quota.cooldownUntil && now < quota.cooldownUntil) {
           const seconds = Math.ceil((quota.cooldownUntil - now) / 1000);
           return `⏳ Slow down! Wait ${seconds} seconds before asking again.`;
@@ -819,7 +956,6 @@
           setUserAIQuota(username, quota.count, now + COOLDOWN_MS_AI);
           return `🚫 Your message contains brainrot content. Please ask an actual question.`;
         }
-
         try {
           const response = await fetch(CEREBRAS_ENDPOINT, {
             method: "POST",
@@ -837,11 +973,9 @@
               max_tokens: 500
             })
           });
-
           if (!response.ok) throw new Error(`API error: ${response.status}`);
           const data = await response.json();
           const answer = data.choices?.[0]?.message?.content || "I couldn't generate an answer right now.";
-
           quota.count++;
           setUserAIQuota(username, quota.count, now + COOLDOWN_MS_AI);
           return answer;
@@ -864,7 +998,6 @@
         const questionInput = document.getElementById("ai-question");
         const responseDiv = document.getElementById("ai-response-area");
         if (!askBtn) return;
-
         askBtn.onclick = async function() {
           if (!currentUser) {
             responseDiv.innerHTML = "⚠️ Please log in first to use the AI.";

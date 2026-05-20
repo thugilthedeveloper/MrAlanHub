@@ -68,14 +68,22 @@
 
     /* Ban page styles */
     #ban-page { position: fixed; inset: 0; z-index: 9500; display: none; align-items: center; justify-content: center; background: rgba(2,3,8,0.92); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); }
-    .ban-container { background: rgba(15,20,35,0.75); border: 2px solid #ef4444; border-radius: 28px; padding: 2.5rem 2rem; max-width: 440px; width: 90%; -webkit-backdrop-filter: blur(35px); backdrop-filter: blur(35px); box-shadow: 0 25px 60px rgba(0,0,0,0.8); text-align: center; animation: banPop 0.6s cubic-bezier(0.175,0.885,0.32,1.275); }
+    .ban-container { background: rgba(15,20,35,0.75); border: 2px solid #ef4444; border-radius: 28px; padding: 2.5rem 2rem; max-width: 500px; width: 90%; -webkit-backdrop-filter: blur(35px); backdrop-filter: blur(35px); box-shadow: 0 25px 60px rgba(0,0,0,0.8); text-align: center; animation: banPop 0.6s cubic-bezier(0.175,0.885,0.32,1.275); }
     @keyframes banPop { from { transform:scale(0.85) translateY(20px); opacity:0; } to { transform:scale(1) translateY(0); opacity:1; } }
     .ban-title { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: #ef4444; margin-bottom: 0.8rem; }
-    .ban-reason { color: #f87171; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .ban-reason { color: #f87171; font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.6; }
     .ban-countdown { font-size: 1.8rem; font-weight: 700; color: #facc15; margin: 1rem 0; }
+    .ban-permanent { font-size: 1.5rem; font-weight: 800; color: #ef4444; margin: 1rem 0; letter-spacing: 2px; animation: pulseRed 1.5s ease-in-out infinite; }
+    @keyframes pulseRed { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
     .ban-fine { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 16px; padding: 1rem; margin: 1.5rem 0; color: #fca5a5; font-size: 0.8rem; }
     .ban-close { background: rgba(239,68,68,0.2); border: 1px solid #ef4444; color: #fff; padding: 10px 24px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
     .ban-close:hover { background: rgba(239,68,68,0.4); }
+    .apology-box { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 16px; padding: 1rem; margin: 1rem 0; color: #fbbf24; font-size: 0.8rem; line-height: 1.6; }
+
+    /* Terms modal */
+    #terms-modal { position: fixed; inset: 0; z-index: 8600; display: none; align-items: center; justify-content: center; background: rgba(2,3,8,0.92); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); }
+    .terms-card { background: rgba(15,20,35,0.8); border: 1px solid rgba(56,189,248,0.3); border-radius: 28px; padding: 2rem; max-width: 500px; width: 90%; -webkit-backdrop-filter: blur(35px); backdrop-filter: blur(35px); box-shadow: 0 25px 60px rgba(0,0,0,0.7); text-align: center; color: #fff; }
+    .terms-link { color: #38bdf8; text-decoration: underline; word-break: break-all; }
 
     .chat-container { display: flex; height: 65vh; background: rgba(12,16,30,0.5); border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); margin-bottom: 2rem; }
     .chat-sidebar { width: 260px; border-right: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; flex-shrink: 0; }
@@ -197,71 +205,26 @@
     .admin-msg { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
     .admin-from { color: #fbbf24; font-weight: 600; }
     .admin-time { font-size: 0.7rem; color: #64748b; margin-left: 0.8rem; }
+    .ban-entry { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 1rem; margin-bottom: 0.8rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .ban-entry .unban-btn { background: #10b981; border: none; color: #fff; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.7rem; }
+    .ban-entry .unban-btn:hover { background: #059669; }
+    .permanent-badge { background: #ef4444; color: #fff; font-size: 0.6rem; font-weight: 800; padding: 3px 8px; border-radius: 20px; letter-spacing: 1px; }
 
     /* Chat logo styles */
-    .chat-logo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.1rem;
-    }
-    .chat-logo .science-text {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.75rem;
-      color: #60a5fa;
-      letter-spacing: 0.15em;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    .chat-logo .hub-main {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.1rem;
-    }
-    .chat-logo .hub-letter {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #3b82f6;
-      text-shadow: 0 0 10px rgba(59,130,246,0.3);
-    }
-    .chat-logo .shield-icon {
-      width: 1.7rem;
-      height: 1.9rem;
-    }
-    .chat-logo .chat-text {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.75rem;
-      color: #f87171;
-      letter-spacing: 0.15em;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    .chat-logo .speech-bubble-icon {
-      width: 1.1rem;
-      height: 1.1rem;
-      color: #f87171;
-    }
+    .chat-logo { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; }
+    .chat-logo .science-text { font-family: 'Syne', sans-serif; font-size: 0.75rem; color: #60a5fa; letter-spacing: 0.15em; font-weight: 700; text-transform: uppercase; }
+    .chat-logo .hub-main { display: flex; align-items: center; justify-content: center; gap: 0.1rem; }
+    .chat-logo .hub-letter { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: #3b82f6; text-shadow: 0 0 10px rgba(59,130,246,0.3); }
+    .chat-logo .shield-icon { width: 1.7rem; height: 1.9rem; }
+    .chat-logo .chat-text { display: flex; align-items: center; gap: 0.3rem; font-family: 'Syne', sans-serif; font-size: 0.75rem; color: #f87171; letter-spacing: 0.15em; font-weight: 700; text-transform: uppercase; }
+    .chat-logo .speech-bubble-icon { width: 1.1rem; height: 1.1rem; color: #f87171; }
 
     /* Section transitions */
-    .section-page {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: sectionIn 0.4s ease-out forwards;
-    }
+    .section-page { opacity: 0; transform: translateY(20px); animation: sectionIn 0.4s ease-out forwards; }
     @keyframes sectionIn { to { opacity: 1; transform: translateY(0); } }
 
     /* DevTools warning overlay */
-    #devtools-warning {
-      position: fixed; inset: 0; background: rgba(2,3,8,0.95); z-index: 99999;
-      display: none; align-items: center; justify-content: center; text-align: center;
-      color: #fff; font-family: 'Syne', sans-serif; font-size: 2rem;
-      flex-direction: column;
-    }
+    #devtools-warning { position: fixed; inset: 0; background: rgba(2,3,8,0.95); z-index: 99999; display: none; align-items: center; justify-content: center; text-align: center; color: #fff; font-family: 'Syne', sans-serif; font-size: 2rem; flex-direction: column; }
     #devtools-warning p { font-family: 'DM Sans', sans-serif; font-size: 1rem; margin-top: 1rem; }
   </style>
 </head>
@@ -303,14 +266,26 @@
   <!-- Ban page -->
   <div id="ban-page">
     <div class="ban-container">
-      <div class="ban-logo">🚫</div>
-      <div class="ban-title">Account Suspended</div>
-      <div class="ban-reason">
+      <div style="font-size: 3rem;">🚫</div>
+      <div class="ban-title" id="ban-title-text">Account Suspended</div>
+      <div class="ban-reason" id="ban-reason-text">
         Reason: Violation of Terms &amp; Conditions.<br/>
         Your account <strong id="ban-email-display"></strong> has been temporarily banned.
       </div>
-      <div class="ban-countdown" id="ban-countdown-timer">Loading...</div>
-      <div class="ban-fine">
+      <div id="ban-countdown-area">
+        <div class="ban-countdown" id="ban-countdown-timer">Loading...</div>
+      </div>
+      <div id="ban-permanent-area" style="display:none;">
+        <div class="ban-permanent">⛔ PERMANENTLY BANNED ⛔</div>
+        <div class="apology-box">
+          <strong>🔓 Unban Condition:</strong><br/>
+          A <strong>public apology</strong> must be posted to <strong>Instagram @grigoriy676767</strong><br/>
+          <small>(Story or Post, mentioning @grigoriy676767)</small><br/><br/>
+          Once the apology is verified, an admin will lift this ban.<br/>
+          <strong>No countdown. No expiry. Manual review only.</strong>
+        </div>
+      </div>
+      <div class="ban-fine" id="ban-fine-area">
         <strong>Early unban fine:</strong> $10 USD<br/>
         <small>Pay to Grigoriy via Instagram @grigoriy676767 or WhatsApp +65 859923389</small>
       </div>
@@ -341,6 +316,24 @@
     </div>
   </div>
 
+  <!-- Terms and Conditions Modal -->
+  <div id="terms-modal" class="fullscreen-modal">
+    <div class="terms-card">
+      <h2 style="font-family:'Syne',sans-serif; margin-bottom: 1rem;">📜 Terms &amp; Conditions</h2>
+      <p style="color:#94a3b8; margin-bottom: 1.5rem; font-size:0.9rem;">
+        Before using the Science Hub, you must read and agree to the full Terms &amp; Conditions.
+      </p>
+      <a class="terms-link" href="https://docs.google.com/document/d/19dgvgLsPRbptzKS1STSsrPetVpMK6cvg0EC78Ukfphw/edit?tab=t.0" target="_blank" rel="noopener">
+        Open Terms &amp; Conditions Document
+      </a>
+      <p style="color:#64748b; font-size:0.7rem; margin: 1.2rem 0;">
+        By clicking "I Agree", you confirm that you have read, understood, and agree to be bound by the Terms &amp; Conditions.
+      </p>
+      <button class="login-btn login-btn-primary" onclick="acceptTerms()">I Agree</button>
+      <button class="btn-ghost" style="margin-top:0.5rem; background:transparent; border:1px solid rgba(255,255,255,0.2);" onclick="logout()">Decline &amp; Logout</button>
+    </div>
+  </div>
+
   <div id="onboarding-modal" class="fullscreen-modal">
     <div class="modal-card">
       <h2 style="font-family:'Syne',sans-serif;">Complete Your Profile</h2>
@@ -364,9 +357,9 @@
   <div id="changelog-modal" style="position:fixed;inset:0;background:rgba(2,6,23,.92);-webkit-backdrop-filter:blur(28px);backdrop-filter:blur(28px);z-index:20000;display:none;align-items:center;justify-content:center;padding:20px;" onclick="toggleModal()">
     <div style="background:rgba(12,16,30,.95);border:1px solid rgba(56,189,248,.3);max-width:480px;width:100%;padding:2.5rem;border-radius:28px;" onclick="event.stopPropagation()">
       <h2 style="color:#38bdf8;font-family:'Syne',sans-serif;">⚡ What's New</h2>
-      <p style="color:#94a3b8;">V5.1 — All Rights Reserved</p>
+      <p style="color:#94a3b8;">V5.2 — All Rights Reserved</p>
       <hr style="border-color:rgba(255,255,255,.06);margin:16px 0;"/>
-      <ul style="list-style:none;color:#fff;line-height:2;"><li>⚡ 3.5s Boot</li><li>💎 Liquid Glass UI</li><li>🔐 Real Google Sign-In</li><li>💬 Messenger</li><li>🤖 HUB.AI (Cerebras LLM)</li></ul>
+      <ul style="list-style:none;color:#fff;line-height:2;"><li>🧠 HUB.AI 70B (General Purpose)</li><li>⛔ Permanent Ban System</li><li>🛡️ DevTools Protection</li><li>💬 Messenger</li><li>🔐 @5steps.academy Only</li></ul>
       <button style="width:100%;margin-top:16px;background:linear-gradient(135deg,#38bdf8,#6366f1);color:#fff;padding:14px;border-radius:16px;font-weight:700;border:none;cursor:pointer;" onclick="toggleModal()">RETURN</button>
     </div>
   </div>
@@ -377,7 +370,7 @@
     <header>
       <div class="header-glass"></div>
       <h1 class="header-title">SCIENCE HUB</h1>
-      <p class="header-sub">COMMAND CENTER V5.1</p>
+      <p class="header-sub">COMMAND CENTER V5.2</p>
     </header>
     <div class="container">
       <div class="nav-bar">
@@ -386,7 +379,6 @@
         <button class="nav-btn" id="nav-admin" onclick="showSection('admin')" style="display:none;">👑 Admin</button>
       </div>
       <div id="section-home" class="section-page">
-        <!-- Classroom announcement -->
         <div style="background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 16px; padding: 1rem 1.5rem; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 0.8rem; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);">
           <span style="font-size:1.5rem;">📢</span>
           <div>
@@ -395,41 +387,27 @@
           </div>
         </div>
         <div class="grid">
-          <!-- Card 1: Progress Ops -->
           <div class="card card-1"><span class="badge">MONITORING</span><h2><span class="card-icon">📊</span> Progress Ops</h2><div class="message-box">Live test score tracking and performance monitoring over time.</div><div class="btn-group"><a href="https://docs.google.com/spreadsheets/d/1JdslBW3FEQayu7oc8CPvfXFyBRZReu90wX_q4LKcAws/edit" class="btn btn-primary" target="_blank">Test Tracker</a></div></div>
-          
-          <!-- Card 5 (new): Save My Exams – second tab -->
           <div class="card card-5"><span class="badge">ALLOWED IN CLASS</span><h2><span class="card-icon">📝</span> Save My Exams</h2><div class="message-box">The only resource approved for in-class use. Access all past papers, mark schemes, and topic questions.</div><div class="btn-group"><a href="https://drive.google.com/drive/folders/19d1SgsR6qJA34oiOPbY1YfjjrdexLiPt" class="btn btn-primary" target="_blank">Open Save My Exams</a></div></div>
-
-          <!-- Card 2: Online Resources (third tab) – removed Save My Exams button -->
           <div class="card card-2"><span class="badge">HOME RESOURCES</span><h2><span class="card-icon">🌐</span> Online Resources</h2><div class="message-box">Top-tier IGCSE revision platforms collated in one place. Past papers, flashcards, and topic notes. <strong>For home study only.</strong></div><div class="btn-group"><a href="https://www.physicsandmathstutor.com/" class="btn btn-primary" target="_blank">Physics & Maths Tutor</a><a href="https://cognitoedu.org/" class="btn btn-ghost" target="_blank">Cognito Education</a><a href="https://www.igcsepro.org/" class="btn btn-ghost" target="_blank">IGCSE Pro</a></div></div>
-
-          <!-- Card 3: Study Docs -->
           <div class="card card-3"><span class="badge">CORE ARCHIVE</span><h2><span class="card-icon">📖</span> Study Docs</h2><div class="message-box">Master subject documentation. Comprehensive Physics, Chemistry, and Biology repositories.</div><div class="btn-group">
             <a href="https://drive.google.com/drive/folders/13kc-hxu9JDubd1okyR6ACtg106etZC10" class="btn btn-ghost" target="_blank">Mr.Alan science notes</a>
             <span class="dev-badge">Under Development (Mr.Alan notes)</span>
             <a href="https://drive.google.com/drive/folders/1BAwTy28B3qS6WwNt-tsnYLHrKv8YRGk9" class="btn btn-ghost" target="_blank">Master Notes Drive</a>
             <a href="https://drive.google.com/drive/folders/1q3fopldY1tTm6qJm920FlC4oEHOtMdCV" class="btn btn-ghost" target="_blank">IITian Academy Drive</a>
           </div></div>
-          <!-- Card 4: Practical Docs -->
           <div class="card card-4"><span class="badge">LAB DATA</span><h2><span class="card-icon">🧪</span> Practical Docs</h2><div class="message-box">Essential guides for practical exams, laboratory procedures, and virtual simulations.</div><div class="btn-group"><a href="https://docs.google.com/document/d/1XfAtIywverGoCXbbm9boheBdpV13N-4HJ9QDAhYlldY/edit" class="btn btn-primary" target="_blank">View Practical Guide</a><a href="https://www.scarecrowscience.co.uk/apps/" class="btn btn-ghost" target="_blank">Scarecrow Apps</a><a href="https://phet.colorado.edu/en/simulations/filter?subjects=chemistry,physics,biology" class="btn btn-ghost" target="_blank">PhET Simulations</a></div></div>
-          <!-- Card 6: Video Hub -->
           <div class="card card-6"><span class="badge">VISUALS</span><h2><span class="card-icon">🎬</span> Video Hub</h2><div class="message-box">Curated YouTube channels for IGCSE science. Study Buddy for Chem & Bio, PLA Academy for Physics.</div><div class="btn-group"><a href="https://www.youtube.com/@IGCSEStudyBuddy" class="btn btn-primary" target="_blank">IGCSE Study Buddy — Chem & Bio</a><a href="https://www.youtube.com/@plaacademy" class="btn btn-ghost" target="_blank">PLA Academy — Physics</a></div></div>
         </div>
-        <!-- AI Tutor Card with shifting rainbow gradient -->
         <div class="card card-1" id="ai-tutor-card" style="margin-top: 2rem;">
-          <span class="badge">🤖 HUB.AI (Cerebras LLM)</span>
-          <h2><span class="card-icon">🧠</span> Ask HUB.AI</h2>
-          <div class="message-box" id="ai-response-area">
-            Ask any question. Powered by Llama 3.1 8B via Cerebras.
-          </div>
+          <span class="badge">🤖 HUB.AI (Llama 3.3 70B)</span>
+          <h2><span class="card-icon">🧠</span> Ask HUB.AI Anything</h2>
+          <div class="message-box" id="ai-response-area">Ask me anything — science, math, history, coding, advice, and more. Powered by Cerebras.</div>
           <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-            <input type="text" id="ai-question" placeholder="e.g., What's the capital of France?" style="flex:1; padding:12px; border-radius:20px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:white;">
+            <input type="text" id="ai-question" placeholder="e.g., Explain quantum computing or write a poem..." style="flex:1; padding:12px; border-radius:20px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:white;">
             <button id="ai-ask-btn" class="btn btn-primary" style="padding:0 20px;">Ask</button>
           </div>
-          <div id="ai-usage-info" style="font-size:0.7rem; color:#94a3b8; text-align:center;">
-            ⚡ You have <span id="remaining-quota">--</span> questions left today (30/day).
-          </div>
+          <div id="ai-usage-info" style="font-size:0.7rem; color:#94a3b8; text-align:center;">⚡ You have <span id="remaining-quota">--</span> questions left today (30/day).</div>
         </div>
       </div>
       <div id="section-chat" style="display:none;" class="section-page">
@@ -441,12 +419,7 @@
                 <div class="hub-main">
                   <span class="hub-letter">H</span>
                   <svg class="shield-icon" viewBox="0 0 24 24" fill="url(#shield-grad)" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="shield-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#3b82f6"/>
-                        <stop offset="100%" stop-color="#8b5cf6"/>
-                      </linearGradient>
-                    </defs>
+                    <defs><linearGradient id="shield-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
                     <path d="M12 2L4 5v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V5l-8-3z"/>
                   </svg>
                   <span class="hub-letter">B</span>
@@ -454,10 +427,8 @@
                 <div class="chat-text">
                   <svg class="speech-bubble-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-                    <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/>
-                    <circle cx="15" cy="10" r="1" fill="currentColor" stroke="none"/>
-                    <path d="M9 13h6" />
-                    <path d="M9 17h3" />
+                    <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1" fill="currentColor" stroke="none"/>
+                    <path d="M9 13h6" /><path d="M9 17h3" />
                   </svg>
                   CHAT
                 </div>
@@ -470,8 +441,13 @@
       </div>
       <div id="section-admin" style="display:none;" class="section-page">
         <div class="admin-container">
-          <div class="admin-title"><span>🛡️</span> Message History – All Users</div>
-          <div id="admin-messages-area"><p style="color:#94a3b8; text-align:center;">Loading messages…</p></div>
+          <div class="admin-title"><span>🛡️</span> Admin Panel</div>
+          <div style="margin-bottom:2rem;">
+            <h3 style="color:#facc15;margin-bottom:1rem;">🔨 Ban Management</h3>
+            <div id="admin-bans-area"><p style="color:#94a3b8;">Loading bans...</p></div>
+          </div>
+          <div class="admin-title" style="font-size:1.4rem;"><span>💬</span> Message History – All Users</div>
+          <div id="admin-messages-area"><p style="color:#94a3b8;text-align:center;">Loading messages...</p></div>
         </div>
       </div>
     </div>
@@ -503,28 +479,22 @@
         <strong style="color:#ef4444;">⚠️ VIOLATION MAY RESULT IN LEGAL ACTION</strong><br/><br/>
         Contact: Instagram <strong>@grigoriy676767</strong> | WhatsApp <strong>+65 859923389</strong><br/><br/>
         Built with <strong>FAST OS</strong> · Powered by <strong>Grigoriy Himself</strong><br/>
-        <strong>SCIENCE HUB V5.1</strong> — IGCSE Study Platform
+        <strong>SCIENCE HUB V5.2</strong> — IGCSE Study Platform
       </div>
     </div>
-    <div class="watermark" id="easterTrigger" onclick="toggleModal()">V5.1.0BETA 🤝🏻 FAST OS</div>
+    <div class="watermark" id="easterTrigger" onclick="toggleModal()">V5.2.0BETA 🤝🏻 FAST OS</div>
   </div>
 
   <script>
     (function() {
       // ========== SECURITY LAYER ==========
-      // Block common devtools shortcuts
       document.addEventListener('keydown', function(e) {
-        // Block F12
         if (e.keyCode === 123 || e.key === 'F12') e.preventDefault();
-        // Block Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C (Element picker)
         if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) e.preventDefault();
-        // Block Ctrl+U (View Source), Ctrl+S (Save), Ctrl+C (only if we want, but might break normal copy)
         if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83)) e.preventDefault();
-        // Allow Ctrl+C only on input fields (we'll handle separately)
         if (e.ctrlKey && e.keyCode === 67 && !(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) e.preventDefault();
       });
 
-      // DevTools detection using console.log timing
       var devtoolsCheckInterval;
       var devtoolsDetectCount = 0;
       var devtoolsAlertShown = false;
@@ -536,13 +506,11 @@
         const t0 = performance.now();
         console.log(largeArray);
         const t1 = performance.now();
-        console.clear(); // try to hide it
+        console.clear();
         const timeTaken = t1 - t0;
-        if (timeTaken > 100) { // threshold in ms
+        if (timeTaken > 100) {
           devtoolsDetectCount++;
-          if (devtoolsDetectCount >= 3) {
-            showDevtoolsWarning();
-          }
+          if (devtoolsDetectCount >= 3) showDevtoolsWarning();
         } else {
           devtoolsDetectCount = 0;
         }
@@ -552,21 +520,15 @@
         if (devtoolsAlertShown) return;
         devtoolsAlertShown = true;
         warningElem.style.display = 'flex';
-        // Start a tight debugger loop that will freeze devtools
         setInterval(function() { debugger; }, 50);
-        clearInterval(devtoolsCheckInterval); // stop the normal check
+        clearInterval(devtoolsCheckInterval);
       }
 
-      // Start detection after a short delay, but only if the user is on the hub maybe? We'll run it everywhere.
       devtoolsCheckInterval = setInterval(checkDevTools, 500);
 
-      // Prevent right-click context menu
-      document.addEventListener('contextmenu', e => {
-        e.preventDefault();
-        return false;
-      });
+      document.addEventListener('contextmenu', e => { e.preventDefault(); return false; });
 
-      // ========== ORIGINAL CODE ==========
+      // ========== BAN SYSTEM ==========
       const ALLOWED_DOMAIN = '@5steps.academy';
       let currentUser = null;
       let pendingGoogleUser = null;
@@ -574,20 +536,23 @@
       const loader = document.getElementById('loader');
       const loginPage = document.getElementById('login-page');
       const mainHub = document.getElementById('main-hub');
+      const termsModal = document.getElementById('terms-modal');
       let userDB = JSON.parse(localStorage.getItem('sciencehub_users') || '{}');
       const chatDB = JSON.parse(localStorage.getItem('sciencehub_chats') || '{}');
       let bans = JSON.parse(localStorage.getItem('sciencehub_bans') || '{}');
 
-      const jasperEmail = 'jasper@5steps.academy';
-      if (!bans[jasperEmail] || Date.now() > bans[jasperEmail]) {
-        bans[jasperEmail] = Date.now() + 30 * 24 * 60 * 60 * 1000;
-        localStorage.setItem('sciencehub_bans', JSON.stringify(bans));
-      }
+      // === BAN LIST ===
+      // Permanent ban for Victoria and Kristian (activation required)
+      bans['victoria@5steps.academy'] = Infinity;
+      bans['kristian@5steps.academy'] = Infinity;
+      // NOTE: Jasper's ban removed.
 
+      // Clean up old demo accounts
       delete userDB['physics_genius'];
       delete userDB['chem_master'];
       delete userDB['bio_explorer'];
       localStorage.setItem('sciencehub_users', JSON.stringify(userDB));
+      localStorage.setItem('sciencehub_bans', JSON.stringify(bans));
 
       function saveUsers() { localStorage.setItem('sciencehub_users', JSON.stringify(userDB)); }
       function saveChats() { localStorage.setItem('sciencehub_chats', JSON.stringify(chatDB)); }
@@ -597,13 +562,44 @@
       let isAdmin = false;
       let banCountdownInterval = null;
 
+      function isPermanentBan(email) { return bans[email] === Infinity; }
+
       function showBanPage(email) {
         loginPage.style.display = 'none';
         document.getElementById('onboarding-modal').style.display = 'none';
+        termsModal.style.display = 'none';
         const banPage = document.getElementById('ban-page');
         document.getElementById('ban-email-display').textContent = email;
+
+        // Custom message for Victoria and Kristian
+        if (email === 'victoria@5steps.academy' || email === 'kristian@5steps.academy') {
+          document.getElementById('ban-title-text').textContent = '🔒 Account Locked';
+          document.getElementById('ban-reason-text').innerHTML = `Please ask <strong>HUB MANAGEMENT (grigoriy)</strong> for activation.`;
+          document.getElementById('ban-countdown-area').style.display = 'none';
+          document.getElementById('ban-permanent-area').style.display = 'none';
+          document.getElementById('ban-fine-area').style.display = 'none';
+          if (banCountdownInterval) clearInterval(banCountdownInterval);
+        } else if (isPermanentBan(email)) {
+          document.getElementById('ban-title-text').textContent = '⛔ PERMANENTLY BANNED';
+          document.getElementById('ban-reason-text').innerHTML = `Reason: <strong>Severe Violation</strong> of Terms &amp; Conditions.<br/>Your account <strong>${email}</strong> has been <strong style="color:#ef4444;">permanently banned</strong>.`;
+          document.getElementById('ban-countdown-area').style.display = 'none';
+          document.getElementById('ban-permanent-area').style.display = 'block';
+          document.getElementById('ban-fine-area').style.display = 'none';
+          if (banCountdownInterval) clearInterval(banCountdownInterval);
+        } else {
+          document.getElementById('ban-title-text').textContent = 'Account Suspended';
+          document.getElementById('ban-reason-text').innerHTML = `Reason: Violation of Terms &amp; Conditions.<br/>Your account <strong>${email}</strong> has been temporarily banned.`;
+          document.getElementById('ban-countdown-area').style.display = 'block';
+          document.getElementById('ban-permanent-area').style.display = 'none';
+          document.getElementById('ban-fine-area').style.display = 'block';
+          startCountdown(email);
+        }
+
         banPage.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+      }
+
+      function startCountdown(email) {
         const unbanTime = bans[email];
         const timerElem = document.getElementById('ban-countdown-timer');
         function updateTimer() {
@@ -614,10 +610,7 @@
             timerElem.textContent = "Your ban has expired. Please log in again.";
             delete bans[email];
             saveBans();
-            setTimeout(() => {
-              banPage.style.display = 'none';
-              loginPage.style.display = 'flex';
-            }, 2000);
+            setTimeout(() => { document.getElementById('ban-page').style.display = 'none'; loginPage.style.display = 'flex'; }, 2000);
             return;
           }
           const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
@@ -632,24 +625,43 @@
       }
 
       function checkBanned(email) {
-        if (bans[email] && Date.now() < bans[email]) {
-          showBanPage(email);
-          return true;
-        }
-        if (bans[email] && Date.now() >= bans[email]) {
+        if (bans[email]) {
+          if (bans[email] === Infinity) { showBanPage(email); return true; }
+          if (Date.now() < bans[email]) { showBanPage(email); return true; }
           delete bans[email];
           saveBans();
         }
         return false;
       }
 
+      // ========== TERMS & CONDITIONS ACCEPTANCE ==========
+      function hasAcceptedTerms(username) {
+        return localStorage.getItem(`tc_accepted_${username}`) === 'true';
+      }
+
+      window.acceptTerms = function() {
+        if (!currentUser) return;
+        localStorage.setItem(`tc_accepted_${currentUser.username}`, 'true');
+        termsModal.style.display = 'none';
+        showHub();
+      };
+
+      function showTermsModal() {
+        // Hide all other modals
+        loginPage.style.display = 'none';
+        document.getElementById('onboarding-modal').style.display = 'none';
+        document.getElementById('ban-page').style.display = 'none';
+        if (banCountdownInterval) clearInterval(banCountdownInterval);
+        // Show terms modal
+        termsModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+
+      // ========== AUTH HANDLERS ==========
       window.handleGoogleCredentialResponse = function(response) {
         const payload = decodeJwtResponse(response.credential);
         const userEmail = payload.email;
-        if (!userEmail.endsWith(ALLOWED_DOMAIN)) {
-          alert('Only @5steps.academy accounts are allowed.');
-          return;
-        }
+        if (!userEmail.endsWith(ALLOWED_DOMAIN)) { alert('Only @5steps.academy accounts are allowed.'); return; }
         if (checkBanned(userEmail)) return;
         const userName = payload.name;
         const userPicture = payload.picture;
@@ -660,7 +672,11 @@
           currentUser.lastActive = Date.now();
           saveUsers();
           checkAdmin();
-          showHub();
+          if (hasAcceptedTerms(currentUser.username)) {
+            showHub();
+          } else {
+            showTermsModal();
+          }
         } else {
           document.getElementById('onboarding-modal').style.display = 'flex';
         }
@@ -669,9 +685,7 @@
       function decodeJwtResponse(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) { return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); }).join(''));
         return JSON.parse(jsonPayload);
       }
 
@@ -679,19 +693,20 @@
         const email = document.getElementById('email-input').value.trim();
         const password = document.getElementById('password-input').value.trim();
         if (!email || !password) { alert('Fill all fields'); return; }
-        if (!email.endsWith(ALLOWED_DOMAIN)) {
-          alert('Only @5steps.academy accounts are allowed.');
-          return;
-        }
+        if (!email.endsWith(ALLOWED_DOMAIN)) { alert('Only @5steps.academy accounts are allowed.'); return; }
         if (checkBanned(email)) return;
         const found = Object.values(userDB).find(u => u.email === email);
-        if (found && found.password === password) { 
+        if (found && found.password === password) {
           currentUser = found;
           currentUser.lastActive = Date.now();
           saveUsers();
           checkAdmin();
-          showHub(); 
-        } else { 
+          if (hasAcceptedTerms(currentUser.username)) {
+            showHub();
+          } else {
+            showTermsModal();
+          }
+        } else {
           alert("Invalid credentials. If you don't have an account, please sign up.");
         }
       };
@@ -705,39 +720,30 @@
         if (!password || password.length < 6) { alert('Password 6+ chars'); return; }
         if (userDB[username]) { alert('Username taken!'); return; }
         let email = pendingGoogleUser?.email || document.getElementById('email-input').value.trim();
-        if (!email.endsWith(ALLOWED_DOMAIN)) {
-          alert('Only @5steps.academy accounts can register.');
-          return;
-        }
+        if (!email.endsWith(ALLOWED_DOMAIN)) { alert('Only @5steps.academy accounts can register.'); return; }
         if (checkBanned(email)) return;
-        currentUser = {
-          username, email, password, age, avatar: pendingGoogleUser?.avatar || '#38bdf8',
-          name: pendingGoogleUser?.name || username, picture: pendingGoogleUser?.picture || '',
-          lastActive: Date.now()
-        };
+        currentUser = { username, email, password, age, avatar: pendingGoogleUser?.avatar || '#38bdf8', name: pendingGoogleUser?.name || username, picture: pendingGoogleUser?.picture || '', lastActive: Date.now() };
         userDB[username] = currentUser;
         saveUsers();
         document.getElementById('onboarding-modal').style.display = 'none';
         pendingGoogleUser = null;
         checkAdmin();
-        showHub();
+        // New users must accept terms
+        showTermsModal();
       };
 
-      function checkAdmin() {
-        isAdmin = !!(currentUser && ADMIN_EMAILS.includes(currentUser.email));
-      }
+      function checkAdmin() { isAdmin = !!(currentUser && ADMIN_EMAILS.includes(currentUser.email)); }
 
       function showHub() {
         loginPage.style.display = 'none';
         document.getElementById('onboarding-modal').style.display = 'none';
         document.getElementById('ban-page').style.display = 'none';
+        termsModal.style.display = 'none';
         if (banCountdownInterval) clearInterval(banCountdownInterval);
         mainHub.classList.add('show-hub');
         document.body.style.overflow = 'auto';
         document.getElementById('user-badge-display').textContent = '👤 @' + currentUser.username;
-        if (currentUser.picture) {
-          document.getElementById('user-badge-display').innerHTML = '<img src="' + currentUser.picture + '" style="width:20px;height:20px;border-radius:50%;margin-right:6px;vertical-align:middle;">@' + currentUser.username;
-        }
+        if (currentUser.picture) { document.getElementById('user-badge-display').innerHTML = '<img src="' + currentUser.picture + '" style="width:20px;height:20px;border-radius:50%;margin-right:6px;vertical-align:middle;">@' + currentUser.username; }
         document.getElementById('nav-admin').style.display = isAdmin ? 'flex' : 'none';
         initScrollReveal();
         loadContacts();
@@ -749,11 +755,10 @@
 
       window.logout = function() {
         if (currentUser) saveUsers();
-        currentUser = null;
-        isAdmin = false;
-        activeChatUser = null;
+        currentUser = null; isAdmin = false; activeChatUser = null;
         mainHub.classList.remove('show-hub');
         loginPage.style.display = 'flex';
+        termsModal.style.display = 'none';
         document.body.style.overflow = 'hidden';
         document.getElementById('section-chat').style.display = 'none';
         document.getElementById('section-home').style.display = 'block';
@@ -772,26 +777,18 @@
       window.showSection = function(s) {
         document.querySelectorAll('.section-page').forEach(sec => sec.style.display = 'none');
         const target = document.getElementById('section-' + s);
-        if (target) {
-          target.style.display = 'block';
-          target.style.animation = 'none';
-          target.offsetHeight;
-          target.style.animation = 'sectionIn 0.4s ease-out forwards';
-        }
+        if (target) { target.style.display = 'block'; target.style.animation = 'none'; target.offsetHeight; target.style.animation = 'sectionIn 0.4s ease-out forwards'; }
         document.getElementById('nav-home').classList.toggle('active', s === 'home');
         document.getElementById('nav-chat').classList.toggle('active', s === 'chat');
         document.getElementById('nav-admin').classList.toggle('active', s === 'admin');
         if (s === 'chat') loadContacts();
-        if (s === 'admin') loadAdminMessages();
+        if (s === 'admin') loadAdminPanel();
       };
 
       function loadContacts() {
         const list = document.getElementById('chat-contact-list');
         const contacts = Object.values(userDB).filter(u => u.username !== (currentUser?.username || ''));
-        if (!contacts.length) { 
-          list.innerHTML = '<p style="padding:1rem;color:#64748b;">No users yet. Share your username <strong>@' + currentUser?.username + '</strong> to start chatting.</p>'; 
-          return; 
-        }
+        if (!contacts.length) { list.innerHTML = '<p style="padding:1rem;color:#64748b;">No users yet. Share your username <strong>@' + currentUser?.username + '</strong> to start chatting.</p>'; return; }
         const now = Date.now();
         const ONLINE_THRESHOLD = 10 * 60 * 1000;
         list.innerHTML = contacts.map(u => {
@@ -815,10 +812,7 @@
 
       function simulateReply(fromUser, toUser) {
         const key = [fromUser, toUser].sort().join('_');
-        const replies = [
-          "Got it! 👍", "Interesting point!", "Let me think about that.", "Can you explain more?",
-          "Haha, I agree!", "Sure, I'll check that later.", "Great, thanks!", "How are you doing?", "Yes, that's right!"
-        ];
+        const replies = ["Got it! 👍", "Interesting point!", "Let me think about that.", "Can you explain more?", "Haha, I agree!", "Sure, I'll check that later.", "Great, thanks!", "How are you doing?", "Yes, that's right!"];
         const randomText = replies[Math.floor(Math.random() * replies.length)];
         if (!chatDB[key]) chatDB[key] = [];
         chatDB[key].push({ from: fromUser, text: randomText, time: Date.now() });
@@ -844,35 +838,41 @@
         setTimeout(() => { simulateReply(activeChatUser, currentUser.username); }, 800);
       };
 
+      function loadAdminPanel() { loadAdminBans(); loadAdminMessages(); }
+
+      function loadAdminBans() {
+        const container = document.getElementById('admin-bans-area');
+        const banEntries = Object.entries(bans);
+        if (!banEntries.length) { container.innerHTML = '<p style="color:#94a3b8;">No banned users.</p>'; return; }
+        let html = '';
+        banEntries.forEach(([email, unbanTime]) => {
+          const isPerm = unbanTime === Infinity;
+          html += `<div class="ban-entry"><div><strong style="color:#f87171;">${email}</strong> ${isPerm ? '<span class="permanent-badge">PERMANENT</span>' : '<span style="color:#94a3b8;font-size:0.7rem;"> Expires: ' + new Date(unbanTime).toLocaleDateString() + '</span>'}</div><button class="unban-btn" onclick="unbanUser('${email}')">✅ Unban</button></div>`;
+        });
+        container.innerHTML = html;
+      }
+
+      window.unbanUser = function(email) {
+        if (confirm(`Unban ${email}?`)) { delete bans[email]; saveBans(); loadAdminBans(); alert(`${email} has been unbanned.`); }
+      };
+
       function loadAdminMessages() {
         const container = document.getElementById('admin-messages-area');
         const allChats = JSON.parse(localStorage.getItem('sciencehub_chats') || '{}');
         const chatKeys = Object.keys(allChats);
-        if (!chatKeys.length) {
-          container.innerHTML = '<p style="color:#94a3b8;text-align:center;">No messages stored yet.</p>';
-          return;
-        }
+        if (!chatKeys.length) { container.innerHTML = '<p style="color:#94a3b8;text-align:center;">No messages stored yet.</p>'; return; }
         let html = '';
         chatKeys.forEach(key => {
           const msgs = allChats[key];
           if (!msgs || !msgs.length) return;
           html += `<div class="conv-group"><div class="conv-header">💬 ${key.replace(/_/g, ' & ')}</div>`;
-          msgs.forEach(m => {
-            const date = new Date(m.time).toLocaleString();
-            html += `<div class="admin-msg"><span class="admin-from">@${m.from}</span>: ${m.text}<span class="admin-time">${date}</span></div>`;
-          });
+          msgs.forEach(m => { const date = new Date(m.time).toLocaleString(); html += `<div class="admin-msg"><span class="admin-from">@${m.from}</span>: ${m.text}<span class="admin-time">${date}</span></div>`; });
           html += '</div>';
         });
         container.innerHTML = html || '<p style="color:#94a3b8;text-align:center;">No messages to display.</p>';
       }
 
-      setTimeout(function() {
-        loader.classList.add('hide-loader');
-        setTimeout(function() { 
-          loginPage.style.display = 'flex'; 
-          document.body.style.overflow = 'hidden'; 
-        }, 400);
-      }, 3500);
+      setTimeout(function() { loader.classList.add('hide-loader'); setTimeout(function() { loginPage.style.display = 'flex'; document.body.style.overflow = 'hidden'; }, 400); }, 3500);
 
       function initScrollReveal() {
         const cards = document.querySelectorAll('#section-home .card');
@@ -896,25 +896,16 @@
         const card = document.getElementById('ai-tutor-card');
         if (!card) return;
         let hue = 0;
-        function update() {
-          const color1 = `hsl(${hue}, 80%, 65%)`;
-          const color2 = `hsl(${(hue + 60) % 360}, 80%, 65%)`;
-          card.style.setProperty('--card-grad', `linear-gradient(135deg, ${color1}, ${color2})`);
-          hue = (hue + 2) % 360;
-        }
+        function update() { const color1 = `hsl(${hue}, 80%, 65%)`; const color2 = `hsl(${(hue + 60) % 360}, 80%, 65%)`; card.style.setProperty('--card-grad', `linear-gradient(135deg, ${color1}, ${color2})`); hue = (hue + 2) % 360; }
         update();
         rainbowInterval = setInterval(update, 1000);
       }
-      function stopRainbowAnimation() {
-        if (rainbowInterval) {
-          clearInterval(rainbowInterval);
-          rainbowInterval = null;
-        }
-      }
+      function stopRainbowAnimation() { if (rainbowInterval) { clearInterval(rainbowInterval); rainbowInterval = null; } }
 
+      // ========== HUB.AI (General Purpose - Llama 3.3 70B) ==========
       const CEREBRAS_KEY = "csk-nmkjhvmyc445vd6xx52xkyv286kpjvvjpkh28jcchpfyre4j";
       const CEREBRAS_ENDPOINT = "https://api.cerebras.ai/v1/chat/completions";
-      const MODEL_NAME = "llama3.1-8b";
+      const MODEL_NAME = "llama3.3-70b";
       const DAILY_LIMIT_AI = 30;
       const COOLDOWN_MS_AI = 10000;
       const BLOCKED_WORDS_AI = ["brainrot", "67", "skibidi", "sigma", "rizz", "gyatt", "lol", "spam", "hack", "infinite", "stupid", "dumb"];
@@ -929,51 +920,46 @@
       }
 
       function setUserAIQuota(username, count, cooldownUntil = 0) {
-        localStorage.setItem(`ai_quota_${username}`, JSON.stringify({
-          count: count,
-          date: new Date().toDateString(),
-          cooldownUntil: cooldownUntil
-        }));
+        localStorage.setItem(`ai_quota_${username}`, JSON.stringify({ count: count, date: new Date().toDateString(), cooldownUntil: cooldownUntil }));
       }
 
-      function containsBlockedAI(text) {
-        const lower = text.toLowerCase();
-        return BLOCKED_WORDS_AI.some(word => lower.includes(word));
-      }
+      function containsBlockedAI(text) { const lower = text.toLowerCase(); return BLOCKED_WORDS_AI.some(word => lower.includes(word)); }
 
       async function askClaude(question, username) {
         let quota = getUserAIQuota(username);
         const now = Date.now();
-        if (quota.cooldownUntil && now < quota.cooldownUntil) {
-          const seconds = Math.ceil((quota.cooldownUntil - now) / 1000);
-          return `⏳ Slow down! Wait ${seconds} seconds before asking again.`;
-        }
-        if (quota.count >= DAILY_LIMIT_AI) {
-          return `🔒 You've used your ${DAILY_LIMIT_AI} free questions today. Come back tomorrow!`;
-        }
-        if (containsBlockedAI(question)) {
-          quota.count++;
-          setUserAIQuota(username, quota.count, now + COOLDOWN_MS_AI);
-          return `🚫 Your message contains brainrot content. Please ask an actual question.`;
-        }
+        if (quota.cooldownUntil && now < quota.cooldownUntil) { const seconds = Math.ceil((quota.cooldownUntil - now) / 1000); return `⏳ Slow down! Wait ${seconds} seconds before asking again.`; }
+        if (quota.count >= DAILY_LIMIT_AI) { return `🔒 You've used your ${DAILY_LIMIT_AI} free questions today. Come back tomorrow!`; }
+        if (containsBlockedAI(question)) { quota.count++; setUserAIQuota(username, quota.count, now + COOLDOWN_MS_AI); return `🚫 Your message contains blocked content. Please ask a proper question.`; }
         try {
           const response = await fetch(CEREBRAS_ENDPOINT, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${CEREBRAS_KEY}`
-            },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${CEREBRAS_KEY}` },
             body: JSON.stringify({
               model: MODEL_NAME,
               messages: [
-                { role: "system", content: "You are a helpful assistant." },
+                { role: "system", content: `You are HUB.AI, a helpful and knowledgeable assistant. STRICT RULES:\n- Answer any question on any topic to the best of your ability\n- Only state facts you are highly confident about\n- If unsure, say "I'm not certain about this, but here's what I know..."\n- For math/science, show your working\n- Never invent formulas, data, or citations\n- If you truly don't know something, say "I cannot reliably answer this question"\n- Be concise but thorough\n- Use examples when helpful\n- You can discuss: science, math, history, literature, coding, art, philosophy, current events, advice, and more` },
                 { role: "user", content: question }
               ],
-              temperature: 0.7,
-              max_tokens: 500
+              temperature: 0.4,
+              max_tokens: 1024,
+              top_p: 0.9
             })
           });
-          if (!response.ok) throw new Error(`API error: ${response.status}`);
+          if (!response.ok) {
+            console.warn("70B model failed, falling back to 8B");
+            const fallbackResponse = await fetch(CEREBRAS_ENDPOINT, {
+              method: "POST",
+              headers: { "Content-Type": "application/json", "Authorization": `Bearer ${CEREBRAS_KEY}` },
+              body: JSON.stringify({ model: "llama3.1-8b", messages: [{ role: "system", content: "You are a helpful assistant. Answer questions accurately. If unsure, admit it." }, { role: "user", content: question }], temperature: 0.4, max_tokens: 800, top_p: 0.9 })
+            });
+            if (!fallbackResponse.ok) throw new Error(`API error: ${fallbackResponse.status}`);
+            const data = await fallbackResponse.json();
+            const answer = data.choices?.[0]?.message?.content || "I couldn't generate an answer right now.";
+            quota.count++;
+            setUserAIQuota(username, quota.count, now + COOLDOWN_MS_AI);
+            return answer + "\n\n⚠️ (Answered by backup model)";
+          }
           const data = await response.json();
           const answer = data.choices?.[0]?.message?.content || "I couldn't generate an answer right now.";
           quota.count++;
@@ -981,7 +967,7 @@
           return answer;
         } catch (err) {
           console.error("AI Tutor error:", err);
-          return "⚠️ AI service temporarily unavailable. Please check your API key or try again later.";
+          return "⚠️ AI service temporarily unavailable. Please try again later.";
         }
       }
 
@@ -999,10 +985,7 @@
         const responseDiv = document.getElementById("ai-response-area");
         if (!askBtn) return;
         askBtn.onclick = async function() {
-          if (!currentUser) {
-            responseDiv.innerHTML = "⚠️ Please log in first to use the AI.";
-            return;
-          }
+          if (!currentUser) { responseDiv.innerHTML = "⚠️ Please log in first to use the AI."; return; }
           const question = questionInput.value.trim();
           if (!question) return;
           responseDiv.innerHTML = "🧠 Thinking...";
